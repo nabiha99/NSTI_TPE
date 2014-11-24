@@ -1,0 +1,11 @@
+##Summary of Amalga Data Pull for Treatment Cohort
+####*Nabiha Huq Saifee*
+####*November 22, 2014*
+
+Sally Lee from the Biomedical Informatics group pulled data for `r nrow(Tdemog)` patients in the treatment group based on MRNs and procedure dates I obtained from PSBC charts. 
+
+The age range of these patients is from `r min(Tdemog$AdmissionAge)` to `r max(Tdemog$AdmissionAge)` year of age with mean age of `r round(mean(Tdemog$AdmissionAge),2)` and median age of `r median(Tdemog$AdmissionAge)`.  A plot of the distribution of ages is shown below.  
+```{r echo=FALSE}
+plot(table(Tdemog$AdmissionAge), main="Age Distribution of NSTI group receiving Therapeutic Plasma Exchange", xlab = "Admission Age", ylab = "Number of Patients")
+```
+
