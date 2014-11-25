@@ -25,6 +25,12 @@ RacePercentage<-round(prop.table(table(Tdemog$RaceDescr))*100,1)
 RacePercentage
 #rbind(RacePercentage,RaceNumber)
 ```
+The majority of patients who received therapeutic plasma exchange did not die during the hospitalization.
+```{r echo=FALSE}
+round(prop.table(table(Tmortality$InpatientMortality))*100,1)
+```
+
+Length of stay
 
 
 
