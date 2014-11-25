@@ -10,6 +10,14 @@ dbWriteTable(conn = db, name = "Tservice", value ="Saifee_Nabiha_service.txt", r
 #Error when loading visit.txt file from Sally: line 8 did not have 16 elements but loaded fine into Excel and resaved as tab delimited data and then read into database
 dbWriteTable(conn = db, name = "Tvisit", value ="Saifee_Nabiha_visit.txt", row.names = FALSE, header = TRUE, sep='\t')
 dbWriteTable(conn = db, name = "Tvisit", value ="visitxls.txt", row.names = FALSE, header = TRUE, sep='\t')
+dbWriteTable(conn = db, name = "Tvisit", value ="~/Desktop/visitxls.csv", row.names = FALSE, header = TRUE)
+#Could not load visit data into database from csv or tab delimited data. Could load csv as data frame in R and then import into database.
+Tvisit<-read.csv(file="visitxls.csv")
+dbWriteTable(conn = db, name = "Tvisit", value = Tvisit, row.names = FALSE)      
+dbListTables(db)
+dbListFields(db,"Tvisit")
+dbReadTable(db,"Tvisit")
+
 #Save tables as dataframes in R
 TDx<-dbGetQuery(db, "select * from TDx")
 TLabs<-dbGetQuery(db, "select * from TLabs")
@@ -18,6 +26,11 @@ Tdemog<-dbGetQuery(db, "select * from Tdemog")
 TPr<-dbGetQuery(db, "select * from TPr")
 Tservice<-dbGetQuery(db, "select * from Tservice")
 Tvisit<-dbGetQuery(db, "select * from Tvisit")
+dbGetQuery(db, "drop table Tvisit")
+
+Tvisit<-read.csv(file="visitxls.csv")
+  
+
 summary(Tdemog)
 
 dbGetQuery(db, "drop table Tdemog")
@@ -29,6 +42,7 @@ Tdemog$Sex[Tdemog$Sex %in% c("Male","M")] <- "Male"
 Tdemog$Sex[Tdemog$Sex %in% c("Female","F")] <- "Female"
 
 #Clean race description data
+Tdemog$RaceDescr[Tdemog$RaceDescr %in% c("Declined to answer")] <- "Other, Not Reported or Unknown"
 Tdemog$RaceDescr[Tdemog$RaceDescr %in% c("Other,Not Reported or Unknown")] <- "Other, Not Reported or Unknown"
 
 
