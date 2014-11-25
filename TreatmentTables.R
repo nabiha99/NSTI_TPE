@@ -23,5 +23,14 @@ summary(Tdemog)
 dbGetQuery(db, "drop table Tdemog")
 rm(Tdemog)
 
+#Clean gender data
+table(Tdemog$Sex)
+Tdemog$Sex[Tdemog$Sex %in% c("Male","M")] <- "Male"
+Tdemog$Sex[Tdemog$Sex %in% c("Female","F")] <- "Female"
+
+#Clean race description data
+Tdemog$RaceDescr[Tdemog$RaceDescr %in% c("Other,Not Reported or Unknown")] <- "Other, Not Reported or Unknown"
+
+
 
 

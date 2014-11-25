@@ -2,10 +2,28 @@
 ####*Nabiha Huq Saifee*
 ####*November 22, 2014*
 
-Sally Lee from the Biomedical Informatics group pulled data for `r nrow(Tdemog)` patients in the treatment group based on MRNs and procedure dates I obtained from PSBC charts. 
+Sally Lee from the Biomedical Informatics group pulled data for **`r nrow(Tdemog)` patients** in the treatment group based on MRNs and procedure dates I obtained from PSBC charts. 
 
-The age range of these patients is from `r min(Tdemog$AdmissionAge)` to `r max(Tdemog$AdmissionAge)` year of age with mean age of `r round(mean(Tdemog$AdmissionAge),2)` and median age of `r median(Tdemog$AdmissionAge)`.  A plot of the distribution of ages is shown below.  
+The age range of these patients is from **`r min(Tdemog$AdmissionAge)` to `r max(Tdemog$AdmissionAge)` years of age** with **mean age of `r round(mean(Tdemog$AdmissionAge),1)` (SD `r round(sd(Tdemog$AdmissionAge),1)`)** and **median age of `r median(Tdemog$AdmissionAge)`.**  A plot of the distribution of ages is shown below.  
 ```{r echo=FALSE}
 plot(table(Tdemog$AdmissionAge), main="Age Distribution of NSTI group receiving Therapeutic Plasma Exchange", xlab = "Admission Age", ylab = "Number of Patients")
 ```
+
+The treatment cohort contains predominantly males.
+```{r echo=FALSE} 
+Tdemog$Sex[Tdemog$Sex %in% c("Male","M")] <- "Male" 
+Tdemog$Sex[Tdemog$Sex %in% c("Female","F")] <- "Female"
+Number<-table(Tdemog$Sex)
+Percentage<-round(prop.table(table(Tdemog$Sex))*100,1)
+rbind(Percentage,Number)
+```
+
+The distribution of race in the table looks as follows:
+```{r echo=FALSE}
+#RaceNumber<-table(Tdemog$RaceDescr)
+RacePercentage<-round(prop.table(table(Tdemog$RaceDescr))*100,1)
+RacePercentage
+#rbind(RacePercentage,RaceNumber)
+```
+
 
